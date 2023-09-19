@@ -1,0 +1,44 @@
+/* Estilo para o tabuleiro */
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px); /* Defina o tamanho das colunas */
+    grid-template-rows: repeat(3, 100px); /* Defina o tamanho das linhas */
+    gap: 2px; /* Espaçamento entre células */
+    width: 306px; /* Largura total do tabuleiro */
+    height: 306px; /* Altura total do tabuleiro */
+    margin: 0 auto; /* Centraliza o tabuleiro horizontalmente */
+}
+
+/* Estilo para as células do tabuleiro */
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px; /* Tamanho da fonte do símbolo */
+    background-color: #3498db; /* Cor de fundo das células */
+    color: #fff; /* Cor do texto (símbolo) */
+    cursor: pointer; /* Cursor ao passar o mouse */
+}
+
+/* Estilo para as células quando o mouse passa por cima */
+.cell:hover {
+    background-color: #2980b9; /* Cor de fundo alterada ao passar o mouse */
+}
+
+/* Estilo para o símbolo 'X' */
+.cell.x {
+    background-color: #e74c3c; /* Cor de fundo para 'X' */
+}
+
+/* Estilo para o símbolo 'O' */
+.cell.o {
+    background-color: #2ecc71; /* Cor de fundo para 'O' */
+}
+
+/* Estilo para a mensagem de vitória ou empate */
+#status {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+    color: #333;
+}
