@@ -1,0 +1,44 @@
+/* Estilos para o tabuleiro do jogo */
+#snake-board {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #4CAF50;
+    margin: 0 auto;
+    background-color: #E0E0E0;
+    position: relative;
+}
+
+/* Estilos para a cobra */
+.snake {
+    width: 20px;
+    height: 20px;
+    background-color: #4CAF50;
+    position: absolute;
+}
+
+/* Estilos para a comida */
+.food {
+    width: 20px;
+    height: 20px;
+    background-color: #FF5733;
+    position: absolute;
+}
+
+/* Estilos para os botões Iniciar e Reiniciar */
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #45A049;
+}
+
+
