@@ -1,0 +1,34 @@
+/* Estilo para o título da página */
+h1 {
+    text-align: center;
+    color: #3498db; /* Cor do título */
+}
+
+/* Estilo para a lista de jogos */
+ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+/* Estilo para os itens da lista (jogos) */
+ul li {
+    margin: 10px;
+}
+
+/* Estilo para os links dos jogos */
+ul li a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db; /* Cor de fundo do link */
+    color: #fff; /* Cor do texto do link */
+    text-decoration: none; /* Remove sublinhado do link */
+    border-radius: 5px; /* Cantos arredondados */
+    font-weight: bold; /* Texto em negrito */
+    transition: background-color 0.3s; /* Efeito de transição na cor de fundo */
+}
+
+/* Estilo para os links dos jogos quando passa o mouse por cima */
+ul li a:hover {
+    background-color: #2980b9; /* Cor de fundo alterada ao passar o mouse */
+}
