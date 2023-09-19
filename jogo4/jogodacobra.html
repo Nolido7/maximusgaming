@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo da Cobrinha</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        /* Estilos para o tabuleiro do jogo */
+        #snake-board {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            position: relative;
+        }
+
+        /* Estilos para a cobra e comida */
+        .snake {
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            position: absolute;
+        }
+
+        .food {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo da Cobrinha</h1>
+    <div id="snake-board"></div>
+    <button id="startButton">Iniciar</button>
+    <button onclick="restartGame()">Reiniciar</button>
+    <button onclick="moveSnake('up')">Cima</button>
+    <button onclick="moveSnake('down')">Baixo</button>
+    <button onclick="moveSnake('left')">Esquerda</button>
+    <button onclick="moveSnake('right')">Direita</button>
+
+    <script>
+        const snakeBoard = document.getElementById('snake-board');
+        const gridSize = 20;
+        let snake = []; // Inicialização da cobra
+        let food = { x: 10, y: 10 }; // Posição inicial da comida
+        let direction = 'right'; // Direção inicial da cobra
+        let gameInterval;
+
+        // Função para criar elementos no tabuleiro
+        function createGameElement(type, x, y) {
+            const element = document.createElement('div');
+            element.className = type;
+            element.style.left = x * gridSize + 'px';
+            element.style.top = y * gridSize + 'px';
+            return element;
+        }
+
+        // Função para gerar uma nova posição para a comida
+        function generateFoodPosition() {
+            const x = Math.floor(Math.random() * (snakeBoard.clientWidth / gridSize));
+            const y = Math.floor(Math.random() * (snakeBoard.clientHeight / gridSize));
+            food = { x, y };
+        }
+
+        // Função para atualizar o jogo
+        function updateGame() {
+            // Verificar se a cobra comeu a comida
+            const head = { ...snake[0] };
+            if (head.x === food.x && head.y === food.y) {
+                generateFoodPosition();
+            } else {
+                // Se não comeu a comida, remova a cauda da cobra para movê-la
+                snake.pop();
+            }
+
+            // Obter a posição da cabeça da cobra
+            if (direction === 'up') {
+                head.y -= 1;
+            } else if (direction === 'down') {
+                head.y += 1;
+            } else if (direction === 'left') {
+                head.x -= 1;
+            } else if (direction === 'right') {
+                head.x += 1;
+            }
+
+            // Verificar se a cobra colidiu com a parede
+            if (head.x < 0 || head.x * gridSize >= snakeBoard.clientWidth ||
+                head.y < 0 || head.y * gridSize >= snakeBoard.clientHeight) {
+                alert('Você perdeu! Clique em Reiniciar para jogar novamente.');
+                clearInterval(gameInterval);
+                return;
+            }
+
+            // Verificar se a cobra colidiu com seu próprio corpo
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    alert('Você perdeu! Clique em Reiniciar para jogar novamente.');
+                    clearInterval(gameInterval);
+                    return;
+                }
+            }
+
+            // Adicionar a nova posição da cabeça no início da cobra
+            snake.unshift(head);
+
+            // Atualizar a tela
+            draw();
+        }
+
+        // Função para desenhar a cobra e a comida na tela
+        function draw() {
+            // Limpar o tabuleiro
+            snakeBoard.innerHTML = '';
+
+            // Desenhar a cobra
+            snake.forEach(segment => {
+                snakeBoard.appendChild(createGameElement('snake', segment.x, segment.y));
+            });
+
+            // Desenhar a comida
+            snakeBoard.appendChild(createGameElement('food', food.x, food.y));
+        }
+
+        // Função para mover a cobra com base na direção
+        function moveSnake(newDirection) {
+            // Lógica para alterar a direção da cobra
+            direction = newDirection;
+        }
+
+        // Função para iniciar o jogo
+        function startGame() {
+            clearInterval(gameInterval);
+            snake = [{ x: 5, y: 5 }]; // Reiniciar a cobra
+            direction = 'right';
+            generateFoodPosition();
+            gameInterval = setInterval(updateGame, 300);
+        }
+
+        // Função para reiniciar o jogo
+        function restartGame() {
+            clearInterval(gameInterval);
+            snake = [{ x: 5, y: 5 }]; // Reiniciar a cobra
+            direction = 'right';
+            generateFoodPosition();
+            gameInterval = setInterval(updateGame, 300);
+        }
+
+        // Adicionar evento de clique ao botão "Iniciar"
+        document.getElementById('startButton').addEventListener('click', startGame);
+    </script>
+</body>
+</html>
